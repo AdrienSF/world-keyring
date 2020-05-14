@@ -10,7 +10,7 @@ What I aim for world keyring to do:
 - take master password as input
 - map the password to a function
 - this function takes the website name as input, and outputs the password to said site
-  
+
 This system should be just as secure in principle as a conventional keyring.
 Even if the password P of website W is leaked, the master password cannot be
 inferred as there are many functions (and thus master passwords) that map
@@ -21,6 +21,8 @@ only an insignificant chance that it will map to the correct password.
 The advantage of this concept over conventional keyrings is that you can use
 your keyring on any machine, you only need to run this python script. You could
 log into a library computer, and still use your master password.
+The disadvantage is that you can't create your own passwords, you'll need to set
+every password based on this system.
 
 This project is intended to be a proof of concept, so I am not planing on
 implementing features to auto-complete password input fields. This script simply
