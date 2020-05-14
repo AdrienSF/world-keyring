@@ -5,10 +5,12 @@ on a system, and a master password is used to retrieve them. The idea for this
 project is to create a keyring system that entirely avoids the need to store
 passwords. The world keyring is in effect a function that maps master passwords
 to functions.
-- input master password
-- world keyring maps the password to a function
-- this function takes the website name as input, and outputs the password to
-  said site.
+
+What I aim for world keyring to do:
+- take master password as input
+- map the password to a function
+- this function takes the website name as input, and outputs the password to said site
+  
 This system should be just as secure in principle as a conventional keyring.
 Even if the password P of website W is leaked, the master password cannot be
 inferred as there are many functions (and thus master passwords) that map
@@ -35,3 +37,6 @@ passwords. The world is your keyring.
 I claim this system is secure, but I have not yet evaluated it's cryptographic
 security in theory, nor have I tested it in practice, so this may end up being
 just a cool idea that doesn't actually work. (like communism)
+
+## Project status
+I've only just started with a simple prototype.
