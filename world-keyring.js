@@ -47,7 +47,7 @@ masterPassInput.id = "masterPassInput";
 var autoFillButton = document.createElement("button");
 autoFillButton.className = "btn";
 autoFillButton.onclick = function(){autoFill();}
-autoFillButton.innerHTML = "autoFill password";
+autoFillButton.innerHTML = "auto-fill password";
 
 var masterPassInputDiv = document.createElement('div');
 masterPassInputDiv.appendChild(masterPassLabel);
