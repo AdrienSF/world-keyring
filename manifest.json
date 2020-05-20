@@ -1,0 +1,16 @@
+{
+
+  "manifest_version": 2,
+  "name": "World Keyring",
+  "version": "0.1",
+
+  "description": "Autofils passwords. This is a proof of concept, not intended for use (never entrust your passwords to third-party software)",
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["world-keyring.js"]
+    }
+  ]
+
+}
