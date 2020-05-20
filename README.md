@@ -30,7 +30,7 @@ To crack the password of any given account, one only needs to check the hashes
 of concat("possible master password", "URL"), in which case the master password
 will be found and all accounts will be compromised. There are many possible
 inputs to sha256 that will output the correct password, but there is likely
-only one such input of the form "masterpassword" + "URL".
+only one such input of the form concat("possible master password", "URL").
 In the future I would like to make an implementation of the world keyring idea
 that is actually secure. To achieve this, I need a system where there are many,
 many different possible master passwords that map to the same output password.
