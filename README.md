@@ -34,9 +34,9 @@ sha1 is known to be vulnerable to collision attacks, but such attacks are irrele
 pre-hash(W) = "master password" ⊕ "W" is a bijective function, so every website W will have a distinct pre-hash. Furthermore, sha1 has a collision probability on the order of 10^-45[2] for under 100 inputs, so in practice every website will have a different password. As such, if an attacker obtains your password P to website W, no other accounts will be directly compromised. To access other accounts, the attacker will need the master password. To find this master password, the attacker would first need to "unhash" P to get the pre-hash, something largely considered implausible, and then compute "pre-hash" ⊕ "W" to obtain a possible master password. I say possible master password, because there are on average 2^(10^19)[3] strings S such that sha1(S) = pre-hash, so it is almost certain that the attacker would only find a useless piece of information. In this case the attacker can only start over and work towards the implausible task of "unhashing" P once again.
 
 
-[1] https://michiel.buddingh.eu/distribution-of-hash-values
-[1] http://web.archive.org/web/20110725085124/http://bitcache.org/faq/hash-collision-probabilities
-[2] 2^(2^64)/2^160 ~= 2^(10^19), https://crypto.stackexchange.com/questions/34518/sha-1-number-of-possible-inputs-number-of-possible-outputs-how-many-inputs-ha
+[1] https://michiel.buddingh.eu/distribution-of-hash-values<br>
+[1] http://web.archive.org/web/20110725085124/http://bitcache.org/faq/hash-collision-probabilities<br>
+[2] 2^(2^64)/2^160 ~= 2^(10^19), https://crypto.stackexchange.com/questions/34518/sha-1-number-of-possible-inputs-number-of-possible-outputs-how-many-inputs-ha<br>
 From [1] I can conclude that the average of 2^(10^19) is relatively consistent.
 
 ## DISCLAIMER
