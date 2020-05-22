@@ -5,6 +5,20 @@ function checkLoaded() {
   console.log("world-keyring loaded on: " + siteName);
 }
 
+
+// this function is not the conventional way to "xor" two strings, it is the xor between ASCII representations of strings
+function pseudo_XOR_str(a, b) {
+  // convert strings to ASCII char codes
+  var aList = a.split('');
+  var bList = b.split('');
+  var xored = '';
+  for (var i = 0; i < aList.length && i < bList.length; i++) {
+    xored += String.fromCharCode(aList[i].charCodeAt() ^ bList[i].charCodeAt());
+  }
+
+  return xored
+}
+
 function failureCallback(error) {
   console.error("Error: " + error);
 }
@@ -28,14 +42,15 @@ function successCallback(result) {
 
 function autoFill() {
   var masterPassword = document.getElementById("masterPassInput").value;
-  var toHash = siteName + masterPassword;
-  console.log("toHash: " + toHash)
-  const shaPromise = crypto.subtle.digest('SHA-256', encoder.encode("yeet"));
+  var toHash = pseudo_XOR_str(siteName, masterPassword);
+  console.log("toHash: " + toHash);
+  const shaPromise = crypto.subtle.digest('SHA-1', encoder.encode(toHash));
   shaPromise.then( successCallback, failureCallback );
 }
 
 
 // get website name
+// var siteName = window.location.href.split("/")[2];
 var siteName = window.location.href;
 
 // display master password input

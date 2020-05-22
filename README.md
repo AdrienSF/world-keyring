@@ -18,29 +18,30 @@ every password based on this system.
 
 ## Project status
 I've completed a proof of concept in the form of a simple firefox extension.
-This extension simply concatenates a given master password and the URL of the
-current page, hashes it, and finally inserts this hash into any password input
-fields present on the page.
+This extension takes a master password and the current page URL as input and inserts a password into any password input
+fields present on the page. Since the URL of the current page does not uniquely identify an account, this implementation cannot be used in practice. For example, it won't be possible to different passwords for multiple accounts on the same website. A practical implementation would need to use information "stored" in the world around
+us that doesn't have the limitations of a URL.
 
 ## Cryptographic Security
-The world keyring firefox extension uses sha256, which is well known and largely
-considered secure. However if it is known that this extension is being used,
-this proof of concept is no better than using one password for all your accounts.
-To crack the password of any given account, one only needs to check the hashes
-of concat("possible master password", "URL"), in which case the master password
-will be found and all accounts will be compromised. There are many possible
-inputs to sha256 that will output the correct password, but there is likely
-only one such input of the form concat("possible master password", "URL").
-In the future I would like to make an implementation of the world keyring idea
-that is actually secure. To achieve this, I need a system where there are many,
-many different possible master passwords that map to the same output password.
-In this way, even if one password is compromised, it will not be feasible to
-deduce the master password.
+The world keyring firefox extension uses uses the following password P for a given website W:
+
+sha1("master password" ⊕ "W") = P
+
+where '⊕' is the XOR binary operation.
+
+sha1 is known to be vulnerable to collision attacks, but such attacks are irrelevant here since their purpose is not to crack passwords. In this case the fact that there are collisions is beneficial, and I chose sha1 as it shows collisions that are quite evenly distributed compared to other hash algorithms[1].
+
+pre-hash(W) = "master password" ⊕ "W" is a bijective function, so every website W will have a distinct pre-hash. Furthermore, sha1 has a collision probability on the order of 10^-45[2] for under 100 inputs, so in practice every website will have a different password. As such, if an attacker obtains your password P to website W, no other accounts will be directly compromised. To access other accounts, the attacker will need the master password. To find this master password, the attacker would first need to "unhash" P to get the pre-hash, something largely considered implausible, and then compute "pre-hash" ⊕ "W" to obtain a possible master password. I say possible master password, because there are on average 2^(10^19)[3] strings S such that sha1(S) = pre-hash, so it is almost certain that the attacker would only find a useless piece of information. In this case the attacker can only start over and work towards the implausible task of "unhashing" P once again.
+
+
+[1] https://michiel.buddingh.eu/distribution-of-hash-values
+[1] http://web.archive.org/web/20110725085124/http://bitcache.org/faq/hash-collision-probabilities
+[2] 2^(2^64)/2^160 ~= 2^(10^19), https://crypto.stackexchange.com/questions/34518/sha-1-number-of-possible-inputs-number-of-possible-outputs-how-many-inputs-ha
+From [1] I can conclude that the average of 2^(10^19) is relatively consistent.
 
 ## DISCLAIMER
 The firefox extension included in this project is a proof of concept that is not
-intended for use. It is not a secure keyring for one, but more importantly never
-entrust your passwords to third-party software.
+intended for use. Never entrust your passwords to third-party software.
 
 ## Installation
 If you wish to test the firefox extension included in this project, go to the
