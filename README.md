@@ -13,7 +13,7 @@ The advantage of this concept over conventional keyrings is that you can use
 your keyring on any machine, since no passwords need to be stored. You could
 log into a library computer, and still use your master password to access all
 your accounts.
-The disadvantage is that you can't create your own passwords, you'll need to set
+The disadvantage is that you can't choose your own passwords, you'll need to set
 every password based on this system.
 
 ## Project status
